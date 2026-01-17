@@ -32,18 +32,18 @@ export function Dashboard() {
 
       if (fetchError) throw fetchError;
 
-      const records = usageData || [];
-      setRecords(records);
+      const fetchedRecords = usageData || [];
+      setRecords(fetchedRecords);
 
-      const totalTokens = records.reduce((sum, r) => sum + r.total_tokens, 0);
-      const totalCost = records.reduce((sum, r) => sum + r.cost_usd, 0);
-      const uniqueDays = new Set(records.map(r => r.created_at.split('T')[0])).size;
+      const totalTokens = fetchedRecords.reduce((sum, r) => sum + r.total_tokens, 0);
+      const totalCost = fetchedRecords.reduce((sum, r) => sum + r.cost_usd, 0);
+      const uniqueDays = new Set(fetchedRecords.map(r => r.created_at.split('T')[0])).size;
       const dailyAverage = uniqueDays > 0 ? totalTokens / uniqueDays : 0;
 
       setStats({ totalTokens, totalCost, dailyAverage });
 
       const dailyMap = new Map<string, { tokens: number; cost: number }>();
-      records.forEach((r) => {
+      fetchedRecords.forEach((r) => {
         const date = r.created_at.split('T')[0];
         const existing = dailyMap.get(date) || { tokens: 0, cost: 0 };
         dailyMap.set(date, {
