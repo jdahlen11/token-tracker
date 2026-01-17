@@ -1,0 +1,8 @@
+# Vibecoder Rules for Token Tracker
+- I am learning. Explain complex patterns in comments.
+- Use functional React components only.
+- Tailwind CSS for all styling (use shadcn components when possible).
+- Mobile-first responsive design.
+- Supabase for backend (auth, database, storage).
+- No explanations unless I ask—just write the code.
+- If you're unsure, ask me to clarify before generating.
