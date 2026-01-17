@@ -57,7 +57,7 @@ export function UsageGraph({ data }: UsageGraphProps) {
                 color: '#fff',
               }}
               labelFormatter={formatDate}
-              formatter={(value: number) => [formatTokens(value), 'Tokens']}
+              formatter={(value: number | undefined) => [formatTokens(value ?? 0), 'Tokens']}
             />
             <Line
               type="monotone"
