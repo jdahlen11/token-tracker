@@ -43,7 +43,7 @@ export function Dashboard() {
       setStats({ totalTokens, totalCost, dailyAverage });
 
       const dailyMap = new Map<string, { tokens: number; cost: number }>();
-      fetchedRecords.forEach((r: UsageRecord) => { => {
+      fetchedRecords.forEach((r: UsageRecord) => {
         const date = r.created_at.split('T')[0];
         const existing = dailyMap.get(date) || { tokens: 0, cost: 0 };
         dailyMap.set(date, {
