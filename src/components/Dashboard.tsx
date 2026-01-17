@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import { Zap, DollarSign, TrendingUp } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
@@ -133,4 +132,5 @@ export function Dashboard() {
     </div>
   );
 }
+
 
