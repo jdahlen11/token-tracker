@@ -11,6 +11,16 @@ import {
 } from 'recharts';
 import type { DailyUsage } from '@/types/database';
 
+export const formatTokens = (value: number) => {
+  if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`;
+  if (value >= 1000) return `${(value / 1000).toFixed(1)}K`;
+  return value.toString();
+};
+
+export const usageTooltipFormatter = (
+  value: number | undefined,
+): [string, string] => [formatTokens(value ?? 0), 'Tokens'];
+
 interface UsageGraphProps {
   data: DailyUsage[];
 }
@@ -19,12 +29,6 @@ export function UsageGraph({ data }: UsageGraphProps) {
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  };
-
-  const formatTokens = (value: number) => {
-    if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`;
-    if (value >= 1000) return `${(value / 1000).toFixed(1)}K`;
-    return value.toString();
   };
 
   return (
@@ -57,7 +61,7 @@ export function UsageGraph({ data }: UsageGraphProps) {
                 color: '#fff',
               }}
               labelFormatter={formatDate}
-              formatter={(value: number | undefined) => [formatTokens(value ?? 0), 'Tokens']}
+              formatter={usageTooltipFormatter}
             />
             <Line
               type="monotone"
